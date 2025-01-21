@@ -20,6 +20,8 @@ M.cfg = {
     return false
   end,
   is_file_binary_post_read = function()
+    -- Nomodifiable buffers
+    if not vim.bo.mod then return false end
     local encoding = (vim.bo.fenc ~= '' and vim.bo.fenc) or vim.o.enc
     if encoding ~= 'utf-8' then return true end
     return false
